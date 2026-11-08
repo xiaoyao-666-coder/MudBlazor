@@ -1,0 +1,45 @@
+<MudPaper Class="pa-6" Width="600px" Elevation="0">
+    <MudText Typo="Typo.h5">Tree filtering</MudText>
+    <MudTextField T="string" Label="Search" Value="_search" ValueChanged="SearchChanged" Immediate="true" Clearable="true" />
+    <MudSwitch @bind-Value="_includeChildren" Label="Include children of matching items" Color="Color.Primary" />
+    <MudSwitch @bind-Value="_virtualize" Label="Virtualize" Color="Color.Primary" />
+    <MudTreeView T="string" @ref="_tree" Items="_items" FilterFunc="Matches" FilterIncludesChildren="_includeChildren" Virtualize="_virtualize" Height="240px">
+        <ItemTemplate>
+            <MudTreeViewItem @bind-Expanded="context.Expanded" Items="context.Children" Value="@context.Value" Text="@context.Text" Visible="context.Visible" />
+        </ItemTemplate>
+    </MudTreeView>
+</MudPaper>
+
+@code {
+    private MudTreeView<string> _tree = null!;
+    private string _search = string.Empty;
+    private bool _includeChildren;
+    private bool _virtualize;
+    private readonly IReadOnlyCollection<ITreeItemData<string>> _items =
+    [
+        new TreeItemData<string> { Value = "Inbox", Text = "Inbox" },
+        new TreeItemData<string>
+        {
+            Value = "Categories", Text = "Categories", Expanded = true,
+            Children =
+            [
+                new TreeItemData<string>
+                {
+                    Value = "Social", Text = "Social", Expanded = true,
+                    Children = [new TreeItemData<string> { Value = "Friends", Text = "Friends" }]
+                },
+                new TreeItemData<string> { Value = "Updates", Text = "Updates" },
+                new TreeItemData<string> { Value = "Forums", Text = "Forums" }
+            ]
+        },
+        new TreeItemData<string> { Value = "History", Text = "History" }
+    ];
+
+    private async Task SearchChanged(string search)
+    {
+        _search = search ?? string.Empty;
+        await _tree.FilterAsync();
+    }
+
+    private Task<bool> Matches(ITreeItemData<string> item) => Task.FromResult(item.Text?.Contains(_search, StringComparison.OrdinalIgnoreCase) == true);
+}

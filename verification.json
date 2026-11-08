@@ -1,0 +1,122 @@
+{
+  "url": "http://127.0.0.1:5286/viewer/Scratch/TreeViewFilterChildren?theme=light&dir=ltr&chrome=none",
+  "viewport": {
+    "width": 900,
+    "height": 680
+  },
+  "browser": "157.0.4341.42",
+  "errors": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "location": {
+        "url": "http://127.0.0.1:5286/favicon.ico",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "failures": [],
+  "steps": [
+    {
+      "name": "initial",
+      "labels": [
+        "Inbox",
+        "Categories",
+        "Social",
+        "Friends",
+        "Updates",
+        "Forums",
+        "History"
+      ],
+      "includeChildren": false,
+      "virtualize": false
+    },
+    {
+      "name": "standard-before",
+      "labels": [
+        "Categories"
+      ],
+      "includeChildren": false,
+      "virtualize": false
+    },
+    {
+      "name": "standard-after",
+      "labels": [
+        "Categories",
+        "Social",
+        "Friends",
+        "Updates",
+        "Forums"
+      ],
+      "includeChildren": true,
+      "virtualize": false
+    },
+    {
+      "name": "virtualized-after",
+      "labels": [
+        "Categories",
+        "Social",
+        "Friends",
+        "Updates",
+        "Forums"
+      ],
+      "includeChildren": true,
+      "virtualize": true
+    },
+    {
+      "name": "virtualized-before",
+      "labels": [
+        "Categories"
+      ],
+      "includeChildren": false,
+      "virtualize": true
+    },
+    {
+      "name": "virtualized-toggle",
+      "labels": [
+        "Categories",
+        "Social",
+        "Friends",
+        "Updates",
+        "Forums"
+      ],
+      "includeChildren": true,
+      "virtualize": true
+    },
+    {
+      "name": "child-match",
+      "labels": [
+        "Categories",
+        "Social",
+        "Friends"
+      ],
+      "includeChildren": true,
+      "virtualize": true
+    },
+    {
+      "name": "no-match",
+      "labels": [],
+      "includeChildren": true,
+      "virtualize": true
+    },
+    {
+      "name": "clear-filter",
+      "labels": [
+        "Inbox",
+        "Categories",
+        "Social",
+        "Friends",
+        "Updates",
+        "Forums",
+        "History"
+      ],
+      "includeChildren": true,
+      "virtualize": true
+    }
+  ],
+  "title": "MudBlazor Tests Viewer",
+  "frames": 405
+}
